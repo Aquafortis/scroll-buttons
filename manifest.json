@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "Scroll Buttons",
-    "version": "1.0",
-    "description": "Adds scroll buttons to page.",
+    "version": "1.1",
+    "description": "Adds scroll buttons to web page.",
     "icons": {
         "48": "icons/icon.png",
         "96": "icons/icon@2x.png"

@@ -43,7 +43,7 @@ window.addEventListener("load", () => {
         var scrollTo = window.setInterval(() => {
             var position = window.pageYOffset;
             if (position > 0) {
-                window.scrollTo(0, position - distance);
+                window.scrollTo(0, (position - distance));
             } else {
                 window.clearInterval(scrollTo);
             }
@@ -55,8 +55,8 @@ window.addEventListener("load", () => {
             var height = document.documentElement.scrollHeight;
             var outer = window.outerHeight;
             var position = window.pageYOffset;
-            if (position < height - outer) {
-                window.scrollTo(0, position + distance);
+            if (position < (height - outer)) {
+                window.scrollTo(0, (position + distance));
             } else {
                 window.clearInterval(scrollTo);
             }
