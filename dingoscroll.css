@@ -1,0 +1,34 @@
+/*! @preserve
+ * Copyright (c) 2019 Aquafortis
+ * Licensed under MPL-2.0 (https://github.com/Aquafortis/scroll-buttons)
+ */
+html {
+    scroll-behavior: smooth;
+}
+
+#dingoup, #dingodn {
+    display: block;
+    position: fixed;
+    z-index: 9999999999;
+    max-width: 30px;
+    right: 10px;
+}
+
+#dingoup {
+    bottom: 50px;
+}
+
+#dingodn {
+    bottom: 20px;
+}
+
+#dingoup, #dingodn {
+    transition: all 0.5s ease 0s;
+    opacity: 0.5;
+    display: none;
+    cursor: pointer;
+}
+
+#dingoup:hover, #dingodn:hover {
+    opacity: 1;
+}
