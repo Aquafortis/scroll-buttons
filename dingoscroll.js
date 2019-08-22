@@ -2,7 +2,11 @@
  * Copyright (c) 2019 Aquafortis
  * Licensed under MPL-2.0 (https://github.com/Aquafortis/scroll-buttons)
  */
-window.addEventListener("load", () => {
+// Scroll buttons
+// Scroll to bottom does not work well with Options format
+// Would need to use jQuery scroll type
+function addElements() {
+    "use strict";
     let head = document.getElementsByTagName("head")[0];
     let style = document.createElement("link");
     style.rel = "stylesheet";
@@ -22,15 +26,18 @@ window.addEventListener("load", () => {
     image2.setAttribute("id", "dingodn");
     document.documentElement.appendChild(image2);
 
-    let dingoup = document.getElementById("dingoup");
-    let dingodn = document.getElementById("dingodn");
+}
+window.addEventListener("load", () => {
+    addElements();
+});
 
-    window.onscroll = function() {
-        showHide();
-    };
+window.addEventListener("load", () => {
+    "use strict";
+    const dingoup = document.getElementById("dingoup");
+    const dingodn = document.getElementById("dingodn");
 
-    function showHide() {
-        if (window.pageYOffset > 300) {
+    function showHide(value) {
+        if (window.pageYOffset > value) {
             dingoup.style.display = "block";
             dingodn.style.display = "block";
         } else {
@@ -39,36 +46,74 @@ window.addEventListener("load", () => {
         }
     }
 
-    function scrollToTop(distance, time) {
-        var scrollTo = window.setInterval(() => {
-            var position = window.pageYOffset;
-            if (position > 0) {
-                window.scrollTo(0, (position - distance));
+    function scrollToTop(distanceup, timeup) {
+        let scrollTop = window.setInterval(() => {
+            let positionup = window.pageYOffset;
+            if (positionup > 0) {
+                window.scrollTo(0, (positionup - distanceup));
             } else {
-                window.clearInterval(scrollTo);
+                window.clearInterval(scrollTop);
             }
-        }, time);
+        }, timeup);
     }
 
-    function scrollToBottom(distance, time) {
-        var scrollTo = window.setInterval(() => {
-            var height = document.documentElement.scrollHeight;
-            var outer = window.outerHeight;
-            var position = window.pageYOffset;
-            if (position < (height - outer)) {
-                window.scrollTo(0, (position + distance));
+    // Does not work well with Options format
+    function scrollToBottom(distancedn, timedn) {
+        let scrollBottom = window.setInterval(() => {
+            let heightdn = document.documentElement.scrollHeight;
+            let outerdn = window.outerHeight;
+            let positiondn = window.pageYOffset;
+            if (positiondn < (heightdn - outerdn)) {
+                window.scrollTo(0, (positiondn + distancedn));
             } else {
-                window.clearInterval(scrollTo);
+                window.clearInterval(scrollBottom);
             }
-        }, time);
+        }, timedn);
     }
 
-    dingoup.addEventListener("click", () => {
-        scrollToTop(600, 10);
-    });
+    function gotAppear(item) {
+        let appear = 300;
+        if (item.appear) {
+            appear = item.appear;
+        }
+        console.log("Appear: ", appear);
+        window.addEventListener("scroll", () => {
+            showHide(appear);
+        });
+    }
+    let getappear = browser.storage.sync.get("appear");
+    getappear.then(gotAppear);
+
+    function gotDistanceUp(item) {
+        let distanceup = 900;
+        if (item.distanceup) {
+            distanceup = item.distanceup;
+        }
+        console.log("Up: ", distanceup);
+        dingoup.addEventListener("click", () => {
+            scrollToTop(distanceup, 10);
+        });
+    }
+    let getdistanceup = browser.storage.sync.get("distanceup");
+    getdistanceup.then(gotDistanceUp);
+
+    /*
+    function gotDistanceDn(item) {
+        let distancedn = 900;
+        if (item.distancedn) {
+            distancedn = item.distancedn;
+        }
+        console.log("Down: ", distancedn);
+        dingodn.addEventListener("click", () => {
+            scrollToBottom(distancedn, 10);
+        });
+    }
+    let getdistancedn = browser.storage.sync.get("distancedn");
+    getdistancedn.then(gotDistanceDn);
+    */
 
     dingodn.addEventListener("click", () => {
-        scrollToBottom(600, 10);
+        scrollToBottom(900, 10);
     });
 
 });

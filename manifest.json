@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Scroll Buttons",
-    "version": "1.1",
+    "version": "1.2",
     "description": "Adds scroll buttons to web page.",
     "icons": {
         "48": "icons/icon.png",
@@ -9,7 +9,8 @@
     },
     "permissions": [
         "tabs",
-        "<all_urls>"
+        "<all_urls>",
+        "storage"
     ],
     "content_scripts": [{
         "all_frames": false,
@@ -22,6 +23,10 @@
         "dingoup.png",
         "dingodn.png"
     ],
+    "options_ui": {
+      "page": "options.html",
+      "browser_style": true
+    },
     "applications": {
         "gecko": {
             "id": "scroll-buttons@aquafortis"
