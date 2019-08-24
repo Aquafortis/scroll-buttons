@@ -3,17 +3,8 @@
  * Licensed under MPL-2.0 (https://github.com/Aquafortis/scroll-buttons)
  */
 // Scroll buttons
-// Scroll to bottom does not work well with Options format
-// Would need to use jQuery scroll type
-function addElements() {
+function dingoScrollButtons() {
     "use strict";
-    let head = document.getElementsByTagName("head")[0];
-    let style = document.createElement("link");
-    style.rel = "stylesheet";
-    style.type = "text/css";
-    style.href = browser.runtime.getURL("dingoscroll.css");
-    head.appendChild(style);
-
     let slide1 = browser.runtime.getURL("dingoup.png");
     let image1 = document.createElement("img");
     image1.setAttribute("src", slide1);
@@ -26,13 +17,6 @@ function addElements() {
     image2.setAttribute("id", "dingodn");
     document.documentElement.appendChild(image2);
 
-}
-window.addEventListener("load", () => {
-    addElements();
-});
-
-window.addEventListener("load", () => {
-    "use strict";
     const dingoup = document.getElementById("dingoup");
     const dingodn = document.getElementById("dingodn");
 
@@ -46,37 +30,36 @@ window.addEventListener("load", () => {
         }
     }
 
-    function scrollToTop(distanceup, timeup) {
+    function scrollToTop(distance, time) {
         let scrollTop = window.setInterval(() => {
-            let positionup = window.pageYOffset;
-            if (positionup > 0) {
-                window.scrollTo(0, (positionup - distanceup));
+            let position = window.pageYOffset;
+            if (position > 0) {
+                window.scrollTo(0, (position - distance));
             } else {
                 window.clearInterval(scrollTop);
             }
-        }, timeup);
+        }, time);
     }
 
-    // Does not work well with Options format
-    function scrollToBottom(distancedn, timedn) {
+    function scrollToBottom(distance, time) {
         let scrollBottom = window.setInterval(() => {
-            let heightdn = document.documentElement.scrollHeight;
-            let outerdn = window.outerHeight;
-            let positiondn = window.pageYOffset;
-            if (positiondn < (heightdn - outerdn)) {
-                window.scrollTo(0, (positiondn + distancedn));
+            let height = document.documentElement.scrollHeight;
+            let outer = window.outerHeight;
+            let position = window.pageYOffset;
+            if (position < (height - outer)) {
+                window.scrollTo(0, (position + distance));
             } else {
                 window.clearInterval(scrollBottom);
             }
-        }, timedn);
+        }, time);
     }
 
     function gotAppear(item) {
         let appear = 300;
         if (item.appear) {
-            appear = item.appear;
+            appear = parseInt(item.appear);
         }
-        console.log("Appear: ", appear);
+        //console.log("Appear: ", appear);
         window.addEventListener("scroll", () => {
             showHide(appear);
         });
@@ -85,35 +68,29 @@ window.addEventListener("load", () => {
     getappear.then(gotAppear);
 
     function gotDistanceUp(item) {
-        let distanceup = 900;
+        let distance = 900;
         if (item.distanceup) {
-            distanceup = item.distanceup;
+            distance = parseInt(item.distanceup);
         }
-        console.log("Up: ", distanceup);
+        //console.log("Up: ", distance);
         dingoup.addEventListener("click", () => {
-            scrollToTop(distanceup, 10);
+            scrollToTop(distance, 10);
         });
     }
     let getdistanceup = browser.storage.sync.get("distanceup");
     getdistanceup.then(gotDistanceUp);
 
-    /*
     function gotDistanceDn(item) {
-        let distancedn = 900;
+        let distance = 900;
         if (item.distancedn) {
-            distancedn = item.distancedn;
+            distance = parseInt(item.distancedn);
         }
-        console.log("Down: ", distancedn);
+        //console.log("Down: ", distance);
         dingodn.addEventListener("click", () => {
-            scrollToBottom(distancedn, 10);
+            scrollToBottom(distance, 10);
         });
     }
     let getdistancedn = browser.storage.sync.get("distancedn");
     getdistancedn.then(gotDistanceDn);
-    */
-
-    dingodn.addEventListener("click", () => {
-        scrollToBottom(900, 10);
-    });
-
-});
+}
+dingoScrollButtons();

@@ -2,9 +2,10 @@ function saveOptions(e) {
     e.preventDefault();
     browser.storage.sync.set({
         appear: document.querySelector("#appear").value,
-        distanceup: document.querySelector("#distanceup").value
-        //distancedn: document.querySelector("#distancedn").value
+        distanceup: document.querySelector("#distanceup").value,
+        distancedn: document.querySelector("#distancedn").value
     });
+    dingoScrollButtons();
 }
 
 function restoreOptions() {
@@ -17,10 +18,9 @@ function restoreOptions() {
         document.querySelector("#distanceup").value = result.distanceup || 900;
     }
 
-    // Does not work well with Options format
-    //function setDistanceDn(result) {
-        //document.querySelector("#distancedn").value = result.distancedn || 900;
-    //}
+    function setDistanceDn(result) {
+        document.querySelector("#distancedn").value = result.distancedn || 900;
+    }
 
     function onError(error) {
         console.log(`Error: ${error}`);
@@ -30,8 +30,8 @@ function restoreOptions() {
     getappear.then(setAppear, onError);
     let getdistanceup = browser.storage.sync.get("distanceup");
     getdistanceup.then(setDistanceUp, onError);
-    //let getdistancedn = browser.storage.sync.get("distancedn");
-    //getdistancedn.then(setDistanceDn, onError);
+    let getdistancedn = browser.storage.sync.get("distancedn");
+    getdistancedn.then(setDistanceDn, onError);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

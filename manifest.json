@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Scroll Buttons",
-    "version": "1.2",
+    "version": "1.3",
     "description": "Adds scroll buttons to web page.",
     "icons": {
         "48": "icons/icon.png",
@@ -24,8 +24,8 @@
         "dingodn.png"
     ],
     "options_ui": {
-      "page": "options.html",
-      "browser_style": true
+        "page": "options.html",
+        "browser_style": true
     },
     "applications": {
         "gecko": {
