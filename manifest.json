@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Scroll Buttons",
-    "version": "1.3",
+    "version": "1.8",
     "description": "Adds scroll buttons to web page.",
     "icons": {
         "48": "icons/icon.png",
@@ -20,12 +20,23 @@
         "css": ["dingoscroll.css"]
     }],
     "web_accessible_resources": [
-        "dingoup.png",
-        "dingodn.png"
+        "images/dingoup.png",
+        "images/dingostop.png",
+        "images/dingodn.png"
     ],
     "options_ui": {
-        "page": "options.html",
+        "page": "options/options.html",
         "browser_style": true
+    },
+    "browser_action": {
+        "browser_style": true,
+        "default_title": "Speed",
+        "default_popup": "popup/popup.html",
+        "default_icon": {
+            "16": "icons/down-16.png",
+            "32": "icons/down-32.png",
+            "64": "icons/down-64.png"
+        }
     },
     "applications": {
         "gecko": {

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="popup.css" />
+</head>
+
+<body>
+
+    <header class="panel-section panel-section-header">
+        <div class="text-section-header">Speed to bottom</div>
+        <div class="icon-header" title="Options page" id="options">
+            <img src="options.png" />
+        </div>
+    </header>
+
+    <div class="browser-style">
+        <div class="panel-section panel-section-formElements">
+            <p>Select scroll speed to bottom.</p>
+            <form>
+                <div class="panel-formElements-item">
+                    <label for="distancedn">Speed:</label>
+                    <select id="distancedn">
+                        <option value="900" selected="true">Default</option>
+                        <option value="10">Read speed</option>
+                        <option value="30">Speed read</option>
+                        <option value="110">Browse speed</option>
+                        <option value="300">Slow</option>
+                        <option value="1200">Fast</option>
+                        <option value="1800">Real fast</option>
+                    </select>
+                </div>
+                <button class="browser-style" type="submit">Save</button>
+            </form>
+            <p>Refresh page to see changes.</p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

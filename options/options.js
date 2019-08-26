@@ -5,7 +5,6 @@ function saveOptions(e) {
         distanceup: document.querySelector("#distanceup").value,
         distancedn: document.querySelector("#distancedn").value
     });
-    dingoScrollButtons();
 }
 
 function restoreOptions() {
@@ -22,16 +21,14 @@ function restoreOptions() {
         document.querySelector("#distancedn").value = result.distancedn || 900;
     }
 
-    function onError(error) {
-        console.log(`Error: ${error}`);
-    }
-
     let getappear = browser.storage.sync.get("appear");
-    getappear.then(setAppear, onError);
+    getappear.then(setAppear);
+
     let getdistanceup = browser.storage.sync.get("distanceup");
-    getdistanceup.then(setDistanceUp, onError);
+    getdistanceup.then(setDistanceUp);
+
     let getdistancedn = browser.storage.sync.get("distancedn");
-    getdistancedn.then(setDistanceDn, onError);
+    getdistancedn.then(setDistanceDn);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

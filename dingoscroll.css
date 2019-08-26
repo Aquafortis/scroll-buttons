@@ -6,7 +6,7 @@ html {
     scroll-behavior: smooth;
 }
 
-#dingoup, #dingodn {
+#dingoup, #dingostop, #dingodn {
     display: block;
     position: fixed;
     z-index: 9999999999;
@@ -15,20 +15,24 @@ html {
 }
 
 #dingoup {
-    bottom: 50px;
+    bottom: 90px;
+}
+
+#dingostop {
+    bottom: 60px;
 }
 
 #dingodn {
-    bottom: 20px;
+    bottom: 30px;
 }
 
-#dingoup, #dingodn {
+#dingoup, #dingostop, #dingodn {
     transition: all 0.5s ease 0s;
-    opacity: 0.5;
+    opacity: 0.1;
     display: none;
     cursor: pointer;
 }
 
-#dingoup:hover, #dingodn:hover {
+#dingoup:hover, #dingostop:hover, #dingodn:hover {
     opacity: 1;
 }

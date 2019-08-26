@@ -5,35 +5,52 @@
 // Scroll buttons
 function dingoScrollButtons() {
     "use strict";
-    let slide1 = browser.runtime.getURL("dingoup.png");
+    let btn1 = browser.runtime.getURL("images/dingoup.png");
     let image1 = document.createElement("img");
-    image1.setAttribute("src", slide1);
     image1.setAttribute("id", "dingoup");
+    image1.setAttribute("src", btn1);
     document.documentElement.appendChild(image1);
 
-    let slide2 = browser.runtime.getURL("dingodn.png");
+    let btn2 = browser.runtime.getURL("images/dingostop.png");
     let image2 = document.createElement("img");
-    image2.setAttribute("src", slide2);
-    image2.setAttribute("id", "dingodn");
+    image2.setAttribute("id", "dingostop");
+    image2.setAttribute("src", btn2);
     document.documentElement.appendChild(image2);
 
+    let btn3 = browser.runtime.getURL("images/dingodn.png");
+    let image3 = document.createElement("img");
+    image3.setAttribute("id", "dingodn");
+    image3.setAttribute("src", btn3);
+    document.documentElement.appendChild(image3);
+
     const dingoup = document.getElementById("dingoup");
+    const dingostop = document.getElementById("dingostop");
     const dingodn = document.getElementById("dingodn");
 
     function showHide(value) {
         if (window.pageYOffset > value) {
             dingoup.style.display = "block";
+            dingostop.style.display = "block";
             dingodn.style.display = "block";
         } else {
             dingoup.style.display = "none";
+            dingostop.style.display = "none";
             dingodn.style.display = "none";
         }
     }
 
     function scrollToTop(distance, time) {
+        let stopClicked = false;
+
+        function clickHandler() {
+            stopClicked = true;
+        }
+        dingostop.addEventListener("click", clickHandler);
+        dingodn.addEventListener("click", clickHandler);
+        window.addEventListener("wheel", clickHandler);
         let scrollTop = window.setInterval(() => {
             let position = window.pageYOffset;
-            if (position > 0) {
+            if (position > 0 && stopClicked == false) {
                 window.scrollTo(0, (position - distance));
             } else {
                 window.clearInterval(scrollTop);
@@ -42,11 +59,19 @@ function dingoScrollButtons() {
     }
 
     function scrollToBottom(distance, time) {
+        let stopClicked = false;
+
+        function clickHandler() {
+            stopClicked = true;
+        }
+        dingostop.addEventListener("click", clickHandler);
+        dingoup.addEventListener("click", clickHandler);
+        window.addEventListener("wheel", clickHandler);
         let scrollBottom = window.setInterval(() => {
             let height = document.documentElement.scrollHeight;
             let outer = window.outerHeight;
             let position = window.pageYOffset;
-            if (position < (height - outer)) {
+            if (position < height - outer && stopClicked == false) {
                 window.scrollTo(0, (position + distance));
             } else {
                 window.clearInterval(scrollBottom);
@@ -59,7 +84,6 @@ function dingoScrollButtons() {
         if (item.appear) {
             appear = parseInt(item.appear);
         }
-        //console.log("Appear: ", appear);
         window.addEventListener("scroll", () => {
             showHide(appear);
         });
@@ -72,9 +96,10 @@ function dingoScrollButtons() {
         if (item.distanceup) {
             distance = parseInt(item.distanceup);
         }
-        //console.log("Up: ", distance);
         dingoup.addEventListener("click", () => {
-            scrollToTop(distance, 10);
+            setTimeout(function() {
+                scrollToTop(distance, 10);
+            }, 100);
         });
     }
     let getdistanceup = browser.storage.sync.get("distanceup");
@@ -85,9 +110,10 @@ function dingoScrollButtons() {
         if (item.distancedn) {
             distance = parseInt(item.distancedn);
         }
-        //console.log("Down: ", distance);
         dingodn.addEventListener("click", () => {
-            scrollToBottom(distance, 10);
+            setTimeout(function() {
+                scrollToBottom(distance, 10);
+            }, 100);
         });
     }
     let getdistancedn = browser.storage.sync.get("distancedn");
