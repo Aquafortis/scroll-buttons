@@ -34,5 +34,5 @@ html {
 }
 
 #dingoup:hover, #dingostop:hover, #dingodn:hover {
-    opacity: 1;
+    opacity: 1 !important;
 }
