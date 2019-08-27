@@ -28,7 +28,7 @@ html {
 
 #dingoup, #dingostop, #dingodn {
     transition: all 0.5s ease 0s;
-    opacity: 0.1;
+    opacity: 0.3;
     display: none;
     cursor: pointer;
 }

@@ -1,7 +1,8 @@
 function saveOptions(e) {
     e.preventDefault();
     browser.storage.sync.set({
-        distancedn: document.querySelector("#distancedn").value
+        distancedn: document.querySelector("#distancedn").value,
+        buttons: document.querySelector("#buttons").value
     });
     setTimeout(function() {
         window.close();
@@ -15,12 +16,18 @@ options.addEventListener("click", () => {
 
 function restoreOptions() {
 
-    function setDistanceDn(result) {
-        document.querySelector("#distancedn").value = result.distancedn || 900;
+    function setOptions(res) {
+        document.querySelector("#distancedn").value = res.distancedn || 900;
+        document.querySelector("#buttons").value = res.buttons || "Show";
     }
 
-    let getdistancedn = browser.storage.sync.get("distancedn");
-    getdistancedn.then(setDistanceDn);
+    let list = [
+        "distancedn",
+        "buttons"
+    ];
+
+    let getoptions = browser.storage.sync.get(list);
+    getoptions.then(setOptions);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

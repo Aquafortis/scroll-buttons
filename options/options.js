@@ -3,32 +3,32 @@ function saveOptions(e) {
     browser.storage.sync.set({
         appear: document.querySelector("#appear").value,
         distanceup: document.querySelector("#distanceup").value,
-        distancedn: document.querySelector("#distancedn").value
+        distancedn: document.querySelector("#distancedn").value,
+        buttons: document.querySelector("#buttons").value,
+        opacity: document.querySelector("#opacity").value
     });
 }
 
 function restoreOptions() {
 
-    function setAppear(result) {
-        document.querySelector("#appear").value = result.appear || 300;
+    function setOptions(res) {
+        document.querySelector("#appear").value = res.appear || 300;
+        document.querySelector("#distanceup").value = res.distanceup || 900;
+        document.querySelector("#distancedn").value = res.distancedn || 900;
+        document.querySelector("#buttons").value = res.buttons || "Show";
+        document.querySelector("#opacity").value = res.opacity || 0.3;
     }
 
-    function setDistanceUp(result) {
-        document.querySelector("#distanceup").value = result.distanceup || 900;
-    }
+    let list = [
+        "appear",
+        "distanceup",
+        "distancedn",
+        "buttons",
+        "opacity"
+    ];
 
-    function setDistanceDn(result) {
-        document.querySelector("#distancedn").value = result.distancedn || 900;
-    }
-
-    let getappear = browser.storage.sync.get("appear");
-    getappear.then(setAppear);
-
-    let getdistanceup = browser.storage.sync.get("distanceup");
-    getdistanceup.then(setDistanceUp);
-
-    let getdistancedn = browser.storage.sync.get("distancedn");
-    getdistancedn.then(setDistanceDn);
+    let getoptions = browser.storage.sync.get(list);
+    getoptions.then(setOptions);
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

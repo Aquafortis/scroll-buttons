@@ -18,17 +18,30 @@
             <p>Settings in pixels.</p>
             <form>
                 <div class="panel-formElements-item">
-                    <label>Scroll before visible&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Scroll before visible:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="text" placeholder="300" id="appear">
                 </div>
                 <p>Pixels travelled every 10 milliseconds.</p>
                 <div class="panel-formElements-item">
-                    <label>Scroll speed to top&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label>Scroll speed to top:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="text" placeholder="900" id="distanceup">
                 </div>
                 <div class="panel-formElements-item">
-                    <label>Scroll speed to bottom</label>
+                    <label>Scroll speed to bottom:</label>
                     <input type="text" placeholder="900" id="distancedn">
+                </div>
+                <p>Show/Hide scroll buttons.</p>
+                <div class="panel-formElements-item">
+                    <label for="buttons">Buttons:</label>
+                    <select id="buttons">
+                        <option value="Show" selected="true">Show</option>
+                        <option value="Hide">Hide</option>
+                    </select>
+                </div>
+                <p>Set opacity of idle buttons. (0.1 to 0.9)</p>
+                <div class="panel-formElements-item">
+                    <label>Opacity:</label>
+                    <input type="text" placeholder="0.3" id="opacity">
                 </div>
                 <button class="browser-style" type="submit">Save</button>
             </form>

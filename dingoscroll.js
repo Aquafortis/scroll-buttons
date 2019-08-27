@@ -27,8 +27,8 @@ function dingoScrollButtons() {
     const dingostop = document.getElementById("dingostop");
     const dingodn = document.getElementById("dingodn");
 
-    function showHide(value) {
-        if (window.pageYOffset > value) {
+    function showHide(appear, buttons) {
+        if (window.pageYOffset > appear && buttons == "Show") {
             dingoup.style.display = "block";
             dingostop.style.display = "block";
             dingodn.style.display = "block";
@@ -79,16 +79,18 @@ function dingoScrollButtons() {
         }, time);
     }
 
-    function gotAppear(item) {
+    function gotAppear(key, value) {
         let appear = 300;
-        if (item.appear) {
-            appear = parseInt(item.appear);
+        let buttons = "Show";
+        if (key.appear || key.buttons) {
+            appear = parseInt(key.appear);
+            buttons = key.buttons;
         }
         window.addEventListener("scroll", () => {
-            showHide(appear);
+            showHide(appear, buttons);
         });
     }
-    let getappear = browser.storage.sync.get("appear");
+    let getappear = browser.storage.sync.get(["appear", "buttons"]);
     getappear.then(gotAppear);
 
     function gotDistanceUp(item) {
@@ -118,5 +120,17 @@ function dingoScrollButtons() {
     }
     let getdistancedn = browser.storage.sync.get("distancedn");
     getdistancedn.then(gotDistanceDn);
+
+    function gotOpacity(item) {
+        let opacity = "0.3";
+        if (item.opacity) {
+            opacity = parseFloat(item.opacity);
+        }
+        dingoup.style.opacity = opacity;
+        dingostop.style.opacity = opacity;
+        dingodn.style.opacity = opacity;
+    }
+    let getopacity = browser.storage.sync.get("opacity");
+    getopacity.then(gotOpacity);
 }
 dingoScrollButtons();
