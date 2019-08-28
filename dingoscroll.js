@@ -120,17 +120,5 @@ function dingoScrollButtons() {
     }
     let getdistancedn = browser.storage.sync.get("distancedn");
     getdistancedn.then(gotDistanceDn);
-
-    function gotOpacity(item) {
-        let opacity = "0.3";
-        if (item.opacity) {
-            opacity = parseFloat(item.opacity);
-        }
-        dingoup.style.opacity = opacity;
-        dingostop.style.opacity = opacity;
-        dingodn.style.opacity = opacity;
-    }
-    let getopacity = browser.storage.sync.get("opacity");
-    getopacity.then(gotOpacity);
 }
 dingoScrollButtons();

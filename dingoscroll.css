@@ -28,11 +28,11 @@ html {
 
 #dingoup, #dingostop, #dingodn {
     transition: all 0.5s ease 0s;
-    opacity: 0.3;
+    opacity: 0.5;
     display: none;
     cursor: pointer;
 }
 
 #dingoup:hover, #dingostop:hover, #dingodn:hover {
-    opacity: 1 !important;
+    opacity: 1;
 }

@@ -4,8 +4,7 @@ function saveOptions(e) {
         appear: document.querySelector("#appear").value,
         distanceup: document.querySelector("#distanceup").value,
         distancedn: document.querySelector("#distancedn").value,
-        buttons: document.querySelector("#buttons").value,
-        opacity: document.querySelector("#opacity").value
+        buttons: document.querySelector("#buttons").value
     });
 }
 
@@ -16,15 +15,13 @@ function restoreOptions() {
         document.querySelector("#distanceup").value = res.distanceup || 900;
         document.querySelector("#distancedn").value = res.distancedn || 900;
         document.querySelector("#buttons").value = res.buttons || "Show";
-        document.querySelector("#opacity").value = res.opacity || 0.3;
     }
 
     let list = [
         "appear",
         "distanceup",
         "distancedn",
-        "buttons",
-        "opacity"
+        "buttons"
     ];
 
     let getoptions = browser.storage.sync.get(list);
