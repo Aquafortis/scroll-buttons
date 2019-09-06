@@ -1,16 +1,15 @@
+/*! @preserve
+ * Copyright (c) 2019 Aquafortis
+ * Licensed under MPL-2.0 (https://github.com/Aquafortis/scroll-buttons)
+ */
 html, body {
     width: 300px;
 }
 
-img {
-    width: 100%;
+.icon-section-header {
+    padding-left: 30px;
 }
 
-.icon-header {
-    margin-left: 30px;
-}
-
-.icon-header img {
-    max-width: 30px;
+.icon-section-header img {
     cursor: pointer;
 }

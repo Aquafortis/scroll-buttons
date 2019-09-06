@@ -1,6 +1,10 @@
+/*! @preserve
+ * Copyright (c) 2019 Aquafortis
+ * Licensed under MPL-2.0 (https://github.com/Aquafortis/scroll-buttons)
+ */
 function saveOptions(e) {
     e.preventDefault();
-    browser.storage.sync.set({
+    chrome.storage.sync.set({
         distancedn: document.querySelector("#distancedn").value,
         buttons: document.querySelector("#buttons").value
     });
@@ -11,23 +15,18 @@ function saveOptions(e) {
 
 let options = document.getElementById("options");
 options.addEventListener("click", () => {
-    browser.runtime.openOptionsPage();
+    chrome.runtime.openOptionsPage();
 });
 
 function restoreOptions() {
-
-    function setOptions(res) {
-        document.querySelector("#distancedn").value = res.distancedn || 900;
-        document.querySelector("#buttons").value = res.buttons || "Show";
-    }
-
-    let list = [
+    let keys = [
         "distancedn",
         "buttons"
     ];
-
-    let getoptions = browser.storage.sync.get(list);
-    getoptions.then(setOptions);
+    chrome.storage.sync.get(keys, function(res) {
+        document.querySelector("#distancedn").value = res.distancedn || 900;
+        document.querySelector("#buttons").value = res.buttons || "Show";
+    });
 }
 
 document.addEventListener("DOMContentLoaded", restoreOptions);

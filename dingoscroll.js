@@ -2,22 +2,21 @@
  * Copyright (c) 2019 Aquafortis
  * Licensed under MPL-2.0 (https://github.com/Aquafortis/scroll-buttons)
  */
-// Scroll buttons
 function dingoScrollButtons() {
     "use strict";
-    let btn1 = browser.runtime.getURL("images/dingoup.png");
+    let btn1 = chrome.runtime.getURL("images/dingoup.png");
     let image1 = document.createElement("img");
     image1.setAttribute("id", "dingoup");
     image1.setAttribute("src", btn1);
     document.documentElement.appendChild(image1);
 
-    let btn2 = browser.runtime.getURL("images/dingostop.png");
+    let btn2 = chrome.runtime.getURL("images/dingostop.png");
     let image2 = document.createElement("img");
     image2.setAttribute("id", "dingostop");
     image2.setAttribute("src", btn2);
     document.documentElement.appendChild(image2);
 
-    let btn3 = browser.runtime.getURL("images/dingodn.png");
+    let btn3 = chrome.runtime.getURL("images/dingodn.png");
     let image3 = document.createElement("img");
     image3.setAttribute("id", "dingodn");
     image3.setAttribute("src", btn3);
@@ -79,46 +78,40 @@ function dingoScrollButtons() {
         }, time);
     }
 
-    function gotAppear(key, value) {
+    chrome.storage.sync.get(["appear", "buttons"], function(res) {
         let appear = 300;
         let buttons = "Show";
-        if (key.appear || key.buttons) {
-            appear = parseInt(key.appear);
-            buttons = key.buttons;
+        if (res.appear || res.buttons) {
+            appear = parseInt(res.appear);
+            buttons = res.buttons;
         }
         window.addEventListener("scroll", () => {
             showHide(appear, buttons);
         });
-    }
-    let getappear = browser.storage.sync.get(["appear", "buttons"]);
-    getappear.then(gotAppear);
+    });
 
-    function gotDistanceUp(item) {
+    chrome.storage.sync.get(["distanceup"], function(res) {
         let distance = 900;
-        if (item.distanceup) {
-            distance = parseInt(item.distanceup);
+        if (res.distanceup) {
+            distance = parseInt(res.distanceup);
         }
         dingoup.addEventListener("click", () => {
             setTimeout(function() {
                 scrollToTop(distance, 10);
             }, 100);
         });
-    }
-    let getdistanceup = browser.storage.sync.get("distanceup");
-    getdistanceup.then(gotDistanceUp);
+    });
 
-    function gotDistanceDn(item) {
+    chrome.storage.sync.get(["distancedn"], function(res) {
         let distance = 900;
-        if (item.distancedn) {
-            distance = parseInt(item.distancedn);
+        if (res.distancedn) {
+            distance = parseInt(res.distancedn);
         }
         dingodn.addEventListener("click", () => {
             setTimeout(function() {
                 scrollToBottom(distance, 10);
             }, 100);
         });
-    }
-    let getdistancedn = browser.storage.sync.get("distancedn");
-    getdistancedn.then(gotDistanceDn);
+    });
 }
 dingoScrollButtons();
