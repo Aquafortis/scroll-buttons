@@ -16,6 +16,9 @@ function saveOptions(e) {
 let options = document.getElementById("options");
 options.addEventListener("click", () => {
     chrome.runtime.openOptionsPage();
+    setTimeout(function() {
+        window.close();
+    }, 100);
 });
 
 function restoreOptions() {
