@@ -19,11 +19,11 @@ function restoreOptions() {
         "distancedn",
         "buttons"
     ];
-    chrome.storage.sync.get(keys, function(res) {
-        document.querySelector("#appear").value = res.appear || 300;
-        document.querySelector("#distanceup").value = res.distanceup || 900;
-        document.querySelector("#distancedn").value = res.distancedn || 900;
-        document.querySelector("#buttons").value = res.buttons || "Show";
+    chrome.storage.sync.get(keys, function(data) {
+        document.querySelector("#appear").value = data.appear || 300;
+        document.querySelector("#distanceup").value = data.distanceup || 900;
+        document.querySelector("#distancedn").value = data.distancedn || 900;
+        document.querySelector("#buttons").value = data.buttons || "Show";
     });
 }
 

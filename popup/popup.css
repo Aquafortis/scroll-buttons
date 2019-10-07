@@ -11,5 +11,6 @@ html, body {
 }
 
 .icon-section-header img {
+    max-width: 32px;
     cursor: pointer;
 }

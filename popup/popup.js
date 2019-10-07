@@ -8,15 +8,15 @@ function saveOptions(e) {
         distancedn: document.querySelector("#distancedn").value,
         buttons: document.querySelector("#buttons").value
     });
-    setTimeout(function() {
+    setTimeout(() => {
         window.close();
     }, 100);
 }
 
-let options = document.getElementById("options");
+const options = document.getElementById("options");
 options.addEventListener("click", () => {
     chrome.runtime.openOptionsPage();
-    setTimeout(function() {
+    setTimeout(() => {
         window.close();
     }, 100);
 });
@@ -26,9 +26,9 @@ function restoreOptions() {
         "distancedn",
         "buttons"
     ];
-    chrome.storage.sync.get(keys, function(res) {
-        document.querySelector("#distancedn").value = res.distancedn || 900;
-        document.querySelector("#buttons").value = res.buttons || "Show";
+    chrome.storage.sync.get(keys, function(data) {
+        document.querySelector("#distancedn").value = data.distancedn || 900;
+        document.querySelector("#buttons").value = data.buttons || "Show";
     });
 }
 

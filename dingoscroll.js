@@ -78,37 +78,37 @@ function dingoScrollButtons() {
         }, time);
     }
 
-    chrome.storage.sync.get(["appear", "buttons"], function(res) {
+    chrome.storage.sync.get(["appear", "buttons"], function(data) {
         let appear = 300;
         let buttons = "Show";
-        if (res.appear || res.buttons) {
-            appear = parseInt(res.appear);
-            buttons = res.buttons;
+        if (data.appear || data.buttons) {
+            appear = parseInt(data.appear);
+            buttons = data.buttons;
         }
         window.addEventListener("scroll", () => {
             showHide(appear, buttons);
         });
     });
 
-    chrome.storage.sync.get(["distanceup"], function(res) {
+    chrome.storage.sync.get(["distanceup"], function(data) {
         let distance = 900;
-        if (res.distanceup) {
-            distance = parseInt(res.distanceup);
+        if (data.distanceup) {
+            distance = parseInt(data.distanceup);
         }
         dingoup.addEventListener("click", () => {
-            setTimeout(function() {
+            setTimeout(() => {
                 scrollToTop(distance, 10);
             }, 100);
         });
     });
 
-    chrome.storage.sync.get(["distancedn"], function(res) {
+    chrome.storage.sync.get(["distancedn"], function(data) {
         let distance = 900;
-        if (res.distancedn) {
-            distance = parseInt(res.distancedn);
+        if (data.distancedn) {
+            distance = parseInt(data.distancedn);
         }
         dingodn.addEventListener("click", () => {
-            setTimeout(function() {
+            setTimeout(() => {
                 scrollToBottom(distance, 10);
             }, 100);
         });
